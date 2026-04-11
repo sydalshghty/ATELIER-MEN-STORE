@@ -58,13 +58,14 @@ const Navbar = () => {
           </button>
 
           {/* User Icon - Hidden on smallest screens */}
-          <button
-            className="hidden text-gray-900 transition-colors hover:text-gray-500 sm:block cursor-pointer"
-            aria-label="User Account"
-          >
-            <User className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />
-          </button>
-
+          <Link to={`/login`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <button
+              className="hidden text-gray-900 transition-colors hover:text-gray-500 sm:block cursor-pointer"
+              aria-label="User Account"
+            >
+              <User className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />
+            </button>
+          </Link>
           {/* Mobile Menu Button - Visible on small screens */}
           <button
             className="block text-gray-900 transition-colors hover:text-gray-500 lg:hidden cursor-pointer"

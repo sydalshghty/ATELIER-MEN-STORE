@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root {
+    --bg-login: #fcf9f8;
+  --color-heading: #1C1B1B;
+  --color-text: #5F5E5E;
+  --color-label: #4E4639;
+  --color-border: #D1C5B4;
+}

@@ -1,3 +1,4 @@
+import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import NewArrivals from "../components/NewArrivals";
 import BestSellers from "../components/BestSellers";
@@ -7,6 +8,7 @@ import Footer from "../components/Footer";
 function HomePage() {
     return (
         <>
+            <Navbar />
             <Hero />
             <NewArrivals />
             <BestSellers />
