@@ -8,3 +8,51 @@
   --color-border: #D1C5B4;
   --color-forget: #C5A059;
 }
+
+/*login-page*/
+.login-page .continue-with{
+  position: relative;
+}
+.login-page .continue-with::before,
+.login-page .continue-with::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-label);
+}
+.login-page .continue-with::before{
+  left: 105%;
+}
+.login-page .continue-with::after{
+  right: 105%;
+}
+.login-page .google-btn p,
+.login-page .facebook-btn p{
+  transition: color 0.5s ease;
+}
+.login-page .google-btn:hover p,
+.login-page .facebook-btn:hover p{
+  color: white;
+}
+.login-page .col-check .active{
+  background-color: #C5A059;
+  border: none;
+}
+@media (max-width: 520px){
+  .login-page .continue-with{
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
