@@ -1,8 +1,35 @@
 import { Cloud, Apple, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import supabase from '../supbase';
+import { useNavigate } from 'react-router-dom';
 function RegisterPage() {
-  const [type, setType] = useState("password")
+  const navigate = useNavigate();
+  const [type, setType] = useState("password");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async () => {
+    if (name === "" || email === "" || password === "") {
+      setError("*pleace fill all this field")
+    }
+    else {
+      const { error, data } = await supabase.auth.signUp({
+        email,
+        password
+      })
+      if (error) {
+        console.log(error);
+      } else {
+        localStorage.setItem("name", name);
+        console.log(data);
+        navigate("/")
+        setError(null);
+      }
+    }
+  }
   return (
     <div className="min-h-screen bg-[#F7F5F2] flex flex-col items-center justify-center p-6 sm:p-12 font-['Montserrat'] text-[#333]">
       <div className="w-full max-w-xl flex flex-col items-center">
@@ -26,6 +53,7 @@ function RegisterPage() {
             </label>
             <input
               required
+              onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="ALEXANDER VANCE"
               className="w-full bg-white border-none py-4 px-6 text-sm tracking-widest placeholder:text-[#D1D1D1] focus:ring-1 focus:ring-[#C4A46B] outline-none transition-all"
@@ -37,6 +65,7 @@ function RegisterPage() {
               Email Address
             </label>
             <input
+              onChange={(e) => setEmail(e.target.value)}
               required
               type="email"
               placeholder="AVANCE@ATELIER.COM"
@@ -51,6 +80,7 @@ function RegisterPage() {
             <div className='w-full flex justify-between items-center bg-white py-4 px-6'>
               <input
                 required
+                onChange={(e) => setPassword(e.target.value)}
                 type={type}
                 placeholder="•••••••••••••"
                 className="w-full bg-white border-none text-lg tracking-widest placeholder:text-[#D1D1D1] outline-none transition-all"
@@ -74,9 +104,10 @@ function RegisterPage() {
               Receive the 'Atelier Dispatch' featuring exclusive private collection access and seasonal editorials.
             </label>
           </div>
-
+          <p className='p-error text-red-400 capitalize text-[17px]'>{error}</p>
           {/* Submit Button */}
           <button
+            onClick={() => handleSubmit()}
             type="submit"
             className="w-full bg-[#C4A46B] cursor-pointer text-white py-5 px-6 text-xs md:text-sm tracking-[0.25em] font-medium uppercase hover:bg-[#B3935A] transition-colors"
           >
