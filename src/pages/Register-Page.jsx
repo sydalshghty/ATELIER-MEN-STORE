@@ -1,77 +1,132 @@
-function RegisterPage(){
-    return(
-        <div className="min-h-screen bg-[#F9F7F2] flex flex-col items-center justify-center p-6 text-zinc-800">
-      <div className="w-full max-w-sm space-y-8">
+import { Cloud, Apple, Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+function RegisterPage() {
+  const [type, setType] = useState("password")
+  return (
+    <div className="min-h-screen bg-[#F7F5F2] flex flex-col items-center justify-center p-6 sm:p-12 font-['Montserrat'] text-[#333]">
+      <div className="w-full max-w-xl flex flex-col items-center">
+
         {/* Header */}
-        <div className="text-center space-y-2">
-          <h1 className="text-4xl font-serif tracking-widest text-zinc-900">ATELIER MEN</h1>
-          <p className="text-sm text-zinc-500 tracking-wide">Join the curated collective.</p>
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-5xl font-['Playfair_Display'] tracking-widest text-[#1a1a1a] mb-2 uppercase">
+            Atelier Men
+          </h1>
+          <div className="w-[40%] h-px bg-[#C4A46B] mx-auto mb-6"></div>
+          <p className="text-[#888] text-sm md:text-base font-light tracking-wide">
+            Join the curated collective.
+          </p>
         </div>
 
         {/* Form */}
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-[10px] font-bold tracking-widest text-zinc-500 mb-1">FULL NAME</label>
-              <input type="text" className="w-full bg-transparent border-b border-zinc-300 py-2 focus:outline-none focus:border-zinc-800 placeholder-zinc-300" placeholder="ALEXANDER VANCE" />
-            </div>
-            <div>
-              <label className="block text-[10px] font-bold tracking-widest text-zinc-500 mb-1">EMAIL ADDRESS</label>
-              <input type="email" className="w-full bg-transparent border-b border-zinc-300 py-2 focus:outline-none focus:border-zinc-800 placeholder-zinc-300" placeholder="AVANCE@ATELIER.COM" />
-            </div>
-            <div>
-              <label className="block text-[10px] font-bold tracking-widest text-zinc-500 mb-1">SECURITY KEY</label>
-              <input type="password" className="w-full bg-transparent border-b border-zinc-300 py-2 focus:outline-none focus:border-zinc-800 placeholder-zinc-300" placeholder="••••••••••••" />
-            </div>
-            <div className="flex items-start gap-2 pt-2">
-              <input type="checkbox" id="subscribe" className="mt-1 accent-zinc-800" />
-              <label htmlFor="subscribe" className="text-[11px] text-zinc-500 leading-tight">
-                Receive the 'Atelier Dispatch' featuring exclusive private collection access and seasonal editorials.
-              </label>
+        <form className="w-full space-y-8" onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label className="block text-[10px] md:text-xs tracking-[0.15em] text-[#888] uppercase mb-2 font-medium">
+              Full Name
+            </label>
+            <input
+              required
+              type="text"
+              placeholder="ALEXANDER VANCE"
+              className="w-full bg-white border-none py-4 px-6 text-sm tracking-widest placeholder:text-[#D1D1D1] focus:ring-1 focus:ring-[#C4A46B] outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[10px] md:text-xs tracking-[0.15em] text-[#888] uppercase mb-2 font-medium">
+              Email Address
+            </label>
+            <input
+              required
+              type="email"
+              placeholder="AVANCE@ATELIER.COM"
+              className="w-full bg-white border-none py-4 px-6 text-sm tracking-widest placeholder:text-[#D1D1D1] focus:ring-1 focus:ring-[#C4A46B] outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[10px] md:text-xs tracking-[0.15em] text-[#888] uppercase mb-2 font-medium">
+              Security Key
+            </label>
+            <div className='w-full flex justify-between items-center bg-white py-4 px-6'>
+              <input
+                required
+                type={type}
+                placeholder="•••••••••••••"
+                className="w-full bg-white border-none text-lg tracking-widest placeholder:text-[#D1D1D1] outline-none transition-all"
+              />
+              {type === "password" ?
+                <EyeOff className='w-6 cursor-pointer text-[#888]' onClick={() => setType("text")} />
+                :
+                <Eye className='w-6 cursor-pointer text-[#888]' onClick={() => setType("password")} />
+              }
             </div>
           </div>
 
-          <button className="w-full bg-[#C5A069] text-white py-3 text-xs font-bold tracking-widest hover:bg-[#b08e5a] transition-colors">
-            CREATE ACCOUNT
+          {/* Newsletter Checkbox */}
+          <div className="flex items-center space-x-3 py-2 ">
+            <input
+              id="newsletter"
+              type="checkbox"
+              className="mt-1 w-4 h-4 border-[#D1D1D1] text-[#C4A46B] focus:ring-[#C4A46B] rounded-none"
+            />
+            <label htmlFor="newsletter" className="text-[10px] md:text-xs text-[#888] leading-relaxed font-light">
+              Receive the 'Atelier Dispatch' featuring exclusive private collection access and seasonal editorials.
+            </label>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-[#C4A46B] cursor-pointer text-white py-5 px-6 text-xs md:text-sm tracking-[0.25em] font-medium uppercase hover:bg-[#B3935A] transition-colors"
+          >
+            Create Account
           </button>
         </form>
 
         {/* Divider */}
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-zinc-200"></div>
-          </div>
-          <div className="relative flex justify-center text-[10px] font-bold tracking-widest text-zinc-400">
-            <span className="bg-[#F9F7F2] px-2">DISCOVER VIA</span>
-          </div>
+        <div className="w-full flex items-center my-10">
+          <div className="grow h-px bg-[#E5E5E5]"></div>
+          <span className="px-4 text-[9px] md:text-[10px] tracking-[0.2em] text-[#D1D1D1] uppercase font-medium">
+            Discover Via
+          </span>
+          <div className="grow h-px bg-[#E5E5E5]"></div>
         </div>
 
-        {/* Social Buttons */}
-        <div className="grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center gap-2 border border-zinc-300 py-3 text-xs font-bold tracking-widest hover:bg-zinc-100 transition-colors">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
-            </svg>
-            GOOGLE
+        {/* Social Login */}
+        <div className="w-full grid grid-cols-2 gap-4">
+          <button className="flex items-center justify-center space-x-3 bg-white py-4 px-4 hover:bg-gray-50 transition-colors">
+            <Cloud className="w-4 h-4 text-[#333]" />
+            <span className="text-[10px] tracking-[0.15em] text-[#333] uppercase font-medium">Google</span>
           </button>
-          <button className="flex items-center justify-center gap-2 border border-zinc-300 py-3 text-xs font-bold tracking-widest hover:bg-zinc-100 transition-colors">
-             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.05 20.28c-.98 1.15-2.01 2.3-3.32 2.3-1.32 0-1.74-.77-3.25-.77-1.52 0-2 .77-3.35.77-1.35 0-2.58-1.29-3.56-2.58-2.58-3.55-2.58-9.04 0-11.88 1.28-1.55 3.35-2.58 5.61-2.58 1.28 0 2.58.77 3.35.77.77 0 2.06-1.03 3.61-1.03 1.55 0 2.84.51 3.87 1.55-3.35 2.06-2.58 5.61-.26 7.15zM12.06 6.18c.26-1.55 1.55-2.84 2.84-3.09-1.29 1.55-3.09 2.58-2.84 3.09z"/>
-            </svg>
-            APPLE
+          <button className="flex items-center justify-center space-x-3 bg-white py-4 px-4 hover:bg-gray-50 transition-colors">
+            <Apple className="w-4 h-4 text-[#333]" />
+            <span className="text-[10px] tracking-[0.15em] text-[#333] uppercase font-medium">Apple</span>
           </button>
         </div>
 
-        {/* Footer */}
-        <div className="text-center text-xs text-zinc-600">
-          ALREADY A MEMBER? <a href="#" className="font-bold text-[#C5A069]">SIGN IN</a>
+        {/* Sign In Link */}
+        <div className="mt-12 text-[10px] md:text-xs tracking-[0.15em] font-medium">
+          <span className="text-[#888] uppercase">Already a member? </span>
+          <Link to={`/login`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className='cursor-pointer'>
+            <button className="text-[#C4A46B] uppercase hover:underline cursor-pointer">Sign In</button>
+          </Link>
         </div>
 
-        <div className="text-center text-[9px] text-zinc-400 tracking-widest pt-4">
-          BY REGISTERING, YOU AGREE TO OUR<br/> TERMS OF SERVICE & PRIVACY POLICY
+        {/* Footer Link */}
+        <div className="mt-16 text-center">
+          <div className="text-[9px] tracking-widest text-[#B1B1B1] uppercase font-light leading-relaxed">
+            By registering, you agree to our
+            <div className="mt-1">
+              <span className="border-b border-[#D1D1D1] pb-px hover:text-[#888] cursor-pointer transition-colors">
+                Terms of Service & Privacy Policy
+              </span>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
-    )
+  )
 }
 export default RegisterPage;
